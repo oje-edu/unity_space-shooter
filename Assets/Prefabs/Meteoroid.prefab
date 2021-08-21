@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1a8d9bd8b26364f8978a1169d997f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  Points: 1
+  Damage: 2
+  Points: 2
   MaximumHealth: 3
   CurrentHealth: 0
   ExplosionPrefab: {fileID: 7046628612115158019, guid: 10dde87b69daaca42b87927540dbc661, type: 3}

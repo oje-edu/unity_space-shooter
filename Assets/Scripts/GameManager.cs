@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,44 @@ public class GameManager : MonoBehaviour
     public GameObject HealthContainer;
     public GameObject HealthUIItemPrefab;
 
+    public GameObject GameOverUI;
+    public GameObject HighScoreUI;
+    public TMP_InputField NameInputField;
+    public HighScoreManager HighScoreManager;
+
     private int _points;
+
+    private void Awake()
+    {
+        GameOverUI.SetActive(false);
+        HighScoreUI.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        GameOverUI.SetActive(true);
+
+        var isNewHighScore = HighScoreManager.IsNewHighScore(_points);
+        HighScoreUI.SetActive(isNewHighScore);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void AddToHighScore()
+    {
+        var playerName = NameInputField.text;
+
+        if (string.IsNullOrWhiteSpace(playerName))
+        {
+            return;
+        }
+
+        HighScoreManager.Add(playerName, _points);
+        HighScoreUI.SetActive(false);
+    }
 
     public void AddPoints(int points)
     {
